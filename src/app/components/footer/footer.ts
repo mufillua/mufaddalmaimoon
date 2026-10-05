@@ -35,13 +35,50 @@ import { Icon } from '../../shared/icon/icon';
             <h2 class="col__title">Contact</h2>
             <ul class="contact">
               <li>
-                <a [href]="contactService.telHref"><app-icon name="phone" size="16" />{{ contact.phoneDisplay }}</a>
+                <a [href]="contactService.telHref">
+                  <app-icon name="phone" size="16" />
+                  {{ contact.phoneDisplay }}
+                </a>
+              </li>
+
+              <li>
+                <a
+                  [href]="contactService.quickWhatsappUrl()"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <app-icon name="whatsapp" size="16" />
+                  WhatsApp
+                </a>
+              </li>
+
+              <li>
+                <a [href]="contactService.mailHref">
+                  <app-icon name="mail" size="16" />
+                  {{ contact.email }}
+                </a>
               </li>
               <li>
-                <a [href]="contactService.quickWhatsappUrl()" target="_blank" rel="noopener noreferrer"><app-icon name="whatsapp" size="16" />WhatsApp</a>
+                <a
+                  href="https://www.linkedin.com/in/mufimaimoon/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Mufaddal Maimoon on LinkedIn"
+                >
+                  <app-icon name="linkedin" size="16" />
+                  LinkedIn
+                </a>
               </li>
               <li>
-                <a [href]="contactService.mailHref"><app-icon name="mail" size="16" />{{ contact.email }}</a>
+                <a
+                  href="https://www.instagram.com/mufimaimoon/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Mufaddal Maimoon on Instagram"
+                >
+                  <app-icon name="instagram" size="16" />
+                  Instagram
+                </a>
               </li>
             </ul>
           </div>
