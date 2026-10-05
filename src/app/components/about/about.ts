@@ -52,7 +52,7 @@ import { RevealDirective } from '../../shared/reveal.directive';
         <div class="content">
           <h2 id="about-title" appReveal>About Me</h2>
           <p class="lead" appReveal="60">
-            I'm Mufaddal Maimoon, a freelance web developer focused on building modern, responsive and
+            I'm Mufaddal Maimoon, a web developer focused on building modern, responsive and
             easy-to-use websites for small and medium-sized businesses.
           </p>
           <p class="body" appReveal="100">

@@ -7,7 +7,7 @@ import { IconName } from '../shared/icon/icon';
 export const CONTACT = {
   name: 'Mufaddal Maimoon',
   firstName: 'Mufaddal',
-  role: 'Freelance Web Developer',
+  role: 'Web Developer',
   phoneDisplay: '+919073053864',
   phoneIntl: '919073053864',          // used for wa.me + tel: links
   email: 'iammufi10@gmail.com',
