@@ -1,0 +1,396 @@
+/* ==========================================================================
+   Design tokens
+   Palette derived from the MM logo: deep navy facets (#06255A → #02356B)
+   and the tagline blue (#2268A6). Change these values to re-theme the site.
+   ========================================================================== */
+:root {
+  /* Brand */
+  --ink: #0b2a57;            /* headings, logo navy */
+  --ink-soft: #2a3f63;       /* body copy */
+  --muted: #56688a;          /* secondary copy (AA on white & sky-50) */
+  --brand: #1f5fa8;          /* primary accent – logo tagline blue */
+  --brand-strong: #164a87;   /* hover / pressed */
+  --brand-soft: #5a8fcb;     /* light accent, illustration strokes */
+
+  /* Pastel blues */
+  --sky-25: #f8fbfe;
+  --sky-50: #f2f7fd;
+  --sky-100: #e7f0fa;
+  --sky-200: #d3e3f5;
+  --sky-300: #b7cfec;
+  --line: #dfe8f3;
+  --white: #ffffff;
+
+  /* Functional – WhatsApp actions only */
+  --wa: #1d8a4d;
+  --wa-strong: #166c3c;
+
+  /* Gradients */
+  --grad-brand: linear-gradient(135deg, #1f5fa8 0%, #0b2a57 100%);
+  --grad-sky: linear-gradient(180deg, #f2f7fd 0%, #ffffff 100%);
+
+  /* Type */
+  --font-display: 'Bricolage Grotesque Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Instrument Sans Variable', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  --fs-h1: clamp(2.15rem, 1.35rem + 3.4vw, 4rem);
+  --fs-h2: clamp(1.8rem, 1.3rem + 1.9vw, 2.75rem);
+  --fs-h3: clamp(1.1rem, 1.04rem + 0.25vw, 1.25rem);
+  --fs-lead: clamp(1.04rem, 0.98rem + 0.3vw, 1.2rem);
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+
+  /* Space & shape */
+  --container: 1200px;
+  --gutter: clamp(1rem, 0.6rem + 2vw, 2rem);
+  --section-y: clamp(4.5rem, 3rem + 6vw, 8rem);
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-pill: 999px;
+
+  /* Elevation – tinted with brand navy rather than neutral grey */
+  --shadow-xs: 0 1px 2px rgba(11, 42, 87, 0.06);
+  --shadow-sm: 0 1px 2px rgba(11, 42, 87, 0.05), 0 6px 18px -8px rgba(31, 95, 168, 0.18);
+  --shadow-md: 0 2px 4px rgba(11, 42, 87, 0.04), 0 18px 40px -16px rgba(31, 95, 168, 0.28);
+  --shadow-lg: 0 4px 8px rgba(11, 42, 87, 0.05), 0 32px 64px -24px rgba(31, 95, 168, 0.35);
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --dur: 280ms;
+
+  --header-h: 76px;
+}
+
+@media (max-width: 860px) {
+  :root { --header-h: 64px; }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 12px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--ink-soft);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+body.no-scroll { overflow: hidden; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.12;
+  letter-spacing: -0.022em;
+  font-weight: 650;
+  text-wrap: balance;
+}
+
+h3 { font-size: var(--fs-h3); line-height: 1.3; letter-spacing: -0.01em; font-weight: 620; }
+
+p { margin: 0; text-wrap: pretty; }
+
+a { color: var(--brand); text-decoration: none; }
+a:hover { color: var(--brand-strong); }
+
+img, svg { display: block; max-width: 100%; }
+
+button, input, select, textarea { font: inherit; color: inherit; }
+
+::selection { background: var(--sky-200); color: var(--ink); }
+
+:focus-visible {
+  outline: 2.5px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem; top: -100px;
+  z-index: 1000;
+  padding: 0.75rem 1.1rem;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  transition: top var(--dur) var(--ease);
+  &:focus { top: 1rem; color: var(--white); }
+}
+
+/* ==========================================================================
+   Layout primitives
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section { padding-block: var(--section-y); position: relative; }
+.section--tint { background: var(--sky-50); }
+
+.section-head {
+  max-width: 680px;
+  margin-bottom: clamp(2.5rem, 2rem + 2vw, 3.75rem);
+
+  h2 { font-size: var(--fs-h2); }
+  p {
+    margin-top: 1rem;
+    font-size: var(--fs-lead);
+    color: var(--muted);
+    max-width: 58ch;
+  }
+
+  &--center {
+    margin-inline: auto;
+    text-align: center;
+    p { margin-inline: auto; }
+  }
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn {
+  --btn-bg: var(--brand);
+  --btn-fg: var(--white);
+  --btn-bd: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 50px;
+  padding: 0.8rem 1.4rem;
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--btn-bd);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-weight: 600;
+  font-size: 0.98rem;
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+
+  svg { width: 18px; height: 18px; flex: none; transition: transform var(--dur) var(--ease); }
+
+  &:hover { color: var(--btn-fg); transform: translateY(-2px); }
+  &:active { transform: translateY(0); }
+  &:focus-visible { border-radius: var(--r-pill); }
+
+  &--primary {
+    box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 10px 24px -10px rgba(31, 95, 168, 0.6);
+    &:hover { --btn-bg: var(--brand-strong); box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 16px 30px -12px rgba(31, 95, 168, 0.65); }
+  }
+
+  &--ghost {
+    --btn-bg: var(--white);
+    --btn-fg: var(--ink);
+    --btn-bd: var(--sky-300);
+    &:hover { --btn-bd: var(--brand); --btn-fg: var(--brand); box-shadow: var(--shadow-sm); }
+  }
+
+  &--whatsapp {
+    --btn-bg: var(--wa);
+    box-shadow: 0 10px 24px -12px rgba(29, 138, 77, 0.6);
+    &:hover { --btn-bg: var(--wa-strong); }
+  }
+
+  &--light {
+    --btn-bg: var(--white);
+    --btn-fg: var(--ink);
+    &:hover { --btn-fg: var(--brand); box-shadow: 0 14px 30px -14px rgba(0,0,0,0.45); }
+  }
+
+  &--outline-light {
+    --btn-bg: transparent;
+    --btn-fg: var(--white);
+    --btn-bd: rgba(255,255,255,0.45);
+    &:hover { --btn-bd: var(--white); background: rgba(255,255,255,0.08); }
+  }
+
+  &--block { width: 100%; }
+
+  &:hover .icon-arrow-right { transform: translateX(3px); }
+  &:hover .icon-arrow-up-right { transform: translate(2px, -2px); }
+  .icon { transition: transform var(--dur) var(--ease); }
+}
+
+/* ==========================================================================
+   Scroll reveal (driven by RevealDirective)
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 700ms var(--ease),
+    transform 700ms var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+
+  &.is-visible { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   Reduced motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   Background decoration system
+   Layers echo the MM logo: faceted diagonal planes, soft blue light,
+   and a fine dot / grid texture. Purely decorative (aria-hidden).
+   ========================================================================== */
+.has-deco {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  > .container { position: relative; z-index: 1; }
+}
+
+.deco {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  > * { position: absolute; display: block; }
+}
+
+/* Textures ------------------------------------------------------------- */
+.deco-dots {
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(31, 95, 168, 0.3) 1.3px, transparent 1.9px);
+  background-size: 22px 22px;
+}
+
+.deco-grid {
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(31, 95, 168, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(31, 95, 168, 0.1) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Masks fade a texture out from one corner/edge */
+.mask-tr { mask-image: radial-gradient(ellipse 55% 65% at 100% 0%, #000 0%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 55% 65% at 100% 0%, #000 0%, transparent 75%); }
+.mask-tl { mask-image: radial-gradient(ellipse 55% 65% at 0% 0%, #000 0%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 55% 65% at 0% 0%, #000 0%, transparent 75%); }
+.mask-bl { mask-image: radial-gradient(ellipse 55% 65% at 0% 100%, #000 0%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 55% 65% at 0% 100%, #000 0%, transparent 75%); }
+.mask-br { mask-image: radial-gradient(ellipse 55% 65% at 100% 100%, #000 0%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 55% 65% at 100% 100%, #000 0%, transparent 75%); }
+.mask-center { mask-image: radial-gradient(ellipse 60% 55% at 50% 50%, #000 0%, transparent 78%); -webkit-mask-image: radial-gradient(ellipse 60% 55% at 50% 50%, #000 0%, transparent 78%); }
+.mask-left { mask-image: linear-gradient(90deg, #000 0%, transparent 60%); -webkit-mask-image: linear-gradient(90deg, #000 0%, transparent 60%); }
+
+/* Soft light ----------------------------------------------------------- */
+.deco-blob {
+  width: var(--s, 460px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--c, #b8d0ef) 0%, color-mix(in srgb, var(--c, #b8d0ef) 45%, transparent) 45%, transparent 100%);
+  opacity: var(--o, 1);
+  will-change: transform;
+  animation: deco-drift 26s ease-in-out infinite alternate;
+}
+
+@keyframes deco-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(4%, 6%, 0) scale(1.06); }
+  100% { transform: translate3d(-5%, 2%, 0) scale(0.97); }
+}
+
+/* Faceted planes (the folded "M") ------------------------------------- */
+.deco-facet {
+  inset: 0;
+  background: linear-gradient(var(--a, 135deg), var(--c1, rgba(122, 162, 214, 0.32)), var(--c2, rgba(231, 240, 250, 0)) 75%);
+}
+.facet-r1 { clip-path: polygon(72% 0, 100% 0, 100% 100%, 88% 100%); }
+.facet-r2 { clip-path: polygon(60% 0, 76% 0, 92% 100%, 78% 100%); }
+.facet-l1 { clip-path: polygon(0 0, 22% 0, 8% 100%, 0 100%); }
+.facet-l2 { clip-path: polygon(0 0, 46% 0, 24% 100%, 0 100%); }
+.facet-band { clip-path: polygon(0 34%, 100% 12%, 100% 58%, 0 80%); }
+
+/* Outline rings */
+.deco-ring {
+  width: var(--s, 360px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1.5px solid rgba(31, 95, 168, 0.18);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 16%;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(31, 95, 168, 0.16);
+  }
+}
+
+/* Thin diagonal strokes, like the edges of the M */
+.deco-line {
+  left: -20%;
+  width: 140%;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(31, 95, 168, 0.28) 45%, rgba(90, 143, 203, 0.18) 60%, transparent);
+  transform: rotate(var(--r, -14deg));
+}
+
+/* Faint brand watermark (uses the real logo mark, not a redraw) */
+.deco-mark {
+  width: var(--s, 520px);
+  height: auto;
+  opacity: var(--o, 0.07);
+}
+
+/* Section base backgrounds -------------------------------------------- */
+.bg-services { background: linear-gradient(180deg, #ffffff 0%, #eef4fc 100%); }
+.bg-work { background: linear-gradient(180deg, #eef4fc 0%, #f8fbff 40%, #edf3fc 100%); }
+.bg-about { background: linear-gradient(180deg, #ffffff 0%, #f1f6fd 100%); }
+.bg-contact { background: linear-gradient(160deg, var(--sky-50) 0%, var(--sky-100) 55%, #eaf1fb 100%); }
+.bg-cta { background: linear-gradient(180deg, #edf3fc 0%, #f7faff 100%); }
+
+@media (max-width: 700px) {
+  .deco-blob { --s: 300px !important; }
+  .deco-ring, .deco-mark { display: none !important; }
+}

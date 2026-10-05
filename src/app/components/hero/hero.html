@@ -1,0 +1,81 @@
+<section id="home" class="hero" aria-labelledby="hero-title">
+  <!-- Faceted background, echoing the folded planes of the MM logo -->
+  <div class="hero__bg" aria-hidden="true">
+    <svg class="facets" viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="fa" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#dbe8f8" />
+          <stop offset="1" stop-color="#eef4fc" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="fb" x1="1" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#cfe0f5" stop-opacity=".9" />
+          <stop offset="1" stop-color="#f2f7fd" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <path d="M760 0 L1440 0 L1440 520 L1120 300 Z" fill="url(#fa)" />
+      <path d="M1040 0 L1440 330 L1440 820 L1180 820 L900 470 Z" fill="url(#fb)" opacity=".55" />
+      <path d="M0 640 L260 820 L0 820 Z" fill="url(#fa)" opacity=".7" />
+    </svg>
+    <div class="grid-lines"></div>
+  </div>
+
+  <div class="container hero__inner">
+    <div class="hero__copy">
+
+      <h1 id="hero-title" class="load-in" style="--d: 80ms">Modern Websites That Help Businesses Grow</h1>
+
+      <p class="hero__lead load-in" style="--d: 160ms">
+        I design and develop fast, responsive and professional websites for small and medium-sized businesses.
+      </p>
+
+      <div class="hero__ctas load-in" style="--d: 240ms">
+        <a class="btn btn--primary" href="#contact">
+          Get a Website Quote
+          <app-icon name="arrow-right" size="18" />
+        </a>
+        <a class="btn btn--ghost" href="#work">View My Work</a>
+      </div>
+
+      <ul class="hero__direct load-in" style="--d: 320ms" aria-label="Contact directly">
+        <li>
+          <a [href]="contactService.quickWhatsappUrl()" target="_blank" rel="noopener noreferrer">
+            <app-icon name="whatsapp" size="18" class="wa" />
+            WhatsApp {{ contact.phoneDisplay }}
+          </a>
+        </li>
+        <li>
+          <a [href]="contactService.mailHref">
+            <app-icon name="mail" size="18" />
+            {{ contact.email }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="hero__visual">
+      <app-hero-visual />
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="clients-strip load-in" style="--d: 520ms">
+      <p class="clients-strip__label">Websites I've built for</p>
+      <ul class="clients-strip__logos">
+        @for (client of clients; track client.name) {
+          <li [class.is-dark]="client.plaque === 'dark'">
+            <a [href]="client.url" target="_blank" rel="noopener noreferrer" [attr.aria-label]="client.name + ' website (opens in a new tab)'">
+              <img
+                [src]="client.logo"
+                [attr.width]="client.logoWidth"
+                [attr.height]="client.logoHeight"
+                [alt]="client.name + ' logo'"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>

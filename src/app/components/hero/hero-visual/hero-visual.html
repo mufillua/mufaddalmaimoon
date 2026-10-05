@@ -1,0 +1,70 @@
+<div class="stage" role="img" aria-label="Illustration: a product catalogue website shown on a desktop browser and a phone, with WhatsApp enquiry buttons">
+  <div class="glow" aria-hidden="true"></div>
+
+  <!-- Desktop browser -->
+  <div class="browser" aria-hidden="true">
+    <div class="browser__bar">
+      <span class="dots"><i></i><i></i><i></i></span>
+      <span class="url"><app-icon name="lock" size="10" />yourbusiness.com</span>
+      <span class="bar-spacer"></span>
+    </div>
+
+    <div class="site">
+      <div class="site__nav">
+        <span class="site__logo"><b></b><i></i></span>
+        <span class="site__links"><em>Products</em><em>About</em><em>Contact</em></span>
+        <span class="site__pill">Get in touch</span>
+      </div>
+
+      <div class="site__hero">
+        <div class="site__copy">
+          <span class="tag"></span>
+          <strong>Quality products for your industry</strong>
+          <span class="line l1"></span>
+          <span class="line l2"></span>
+          <span class="site__btns">
+            <span class="mini-btn">View catalogue</span>
+            <span class="mini-btn mini-btn--wa"><app-icon name="whatsapp" size="9" />Enquire</span>
+          </span>
+        </div>
+        <div class="site__art">
+          <span class="facet f1"></span>
+          <span class="facet f2"></span>
+          <span class="facet f3"></span>
+        </div>
+      </div>
+
+      <div class="site__grid">
+        @for (p of products; track p.name; let i = $index) {
+          <div class="card" [style.--i]="i">
+            <div class="card__thumb"><span class="shape" [class]="'shape shape--' + p.shape"></span></div>
+            <span class="line"></span>
+            <span class="line short"></span>
+            <span class="card__cta"><app-icon name="whatsapp" size="8" />Enquire</span>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Phone -->
+  <div class="phone" aria-hidden="true">
+    <div class="phone__screen">
+      <span class="phone__notch"></span>
+      <div class="phone__thumb"><span class="shape shape--gear"></span></div>
+      <span class="line"></span>
+      <span class="line short"></span>
+      <span class="line tiny"></span>
+      <span class="phone__cta"><app-icon name="whatsapp" size="10" />Enquire on WhatsApp</span>
+      <span class="phone__cta phone__cta--ghost"><app-icon name="mail" size="10" />Email enquiry</span>
+    </div>
+  </div>
+
+  <!-- Floating chips -->
+  @for (chip of chips; track chip.label) {
+    <span class="chip" [class]="'chip ' + chip.pos" [class.chip--wa]="chip.tone === 'wa'" aria-hidden="true">
+      <span class="chip__icon"><app-icon [name]="chip.icon" size="16" /></span>
+      {{ chip.label }}
+    </span>
+  }
+</div>

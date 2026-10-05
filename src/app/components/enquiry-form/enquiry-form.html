@@ -1,0 +1,188 @@
+<section id="contact" class="section contact has-deco bg-contact" aria-labelledby="contact-title">
+  <div class="deco" aria-hidden="true">
+    <span class="deco-dots mask-tl"></span>
+    <span class="deco-line" style="top: 12%; --r: -10deg"></span>
+    <span class="deco-line" style="top: 88%; --r: -7deg"></span>
+    <span class="deco-grid mask-br"></span>
+    <span class="deco-facet facet-r2" style="--a: 170deg; --c1: rgba(255, 255, 255, 0.75); --c2: rgba(255, 255, 255, 0)"></span>
+    <span class="deco-facet facet-r1" style="--a: 200deg; --c1: rgba(183, 207, 236, 0.55)"></span>
+    <span class="deco-blob" style="--s: 600px; --c: #a7c3ea; top: 10%; right: 8%; animation-delay: -3s"></span>
+    <span class="deco-blob" style="--s: 440px; --c: #ffffff; --o: 0.8; bottom: -140px; left: -100px; animation-delay: -12s"></span>
+  </div>
+  <div class="container layout">
+    <!-- Intro -->
+    <div class="intro">
+      <h2 id="contact-title" appReveal>Let's Build Your Website</h2>
+      <p class="intro__sub" appReveal="60">
+        Tell me about your business and I'll help you understand what kind of website would work best for you.
+      </p>
+
+      <ul class="direct" appReveal="120" aria-label="Other ways to reach me">
+        <li>
+          <a [href]="contactService.quickWhatsappUrl()" target="_blank" rel="noopener noreferrer">
+            <span class="direct__ic direct__ic--wa"><app-icon name="whatsapp" size="20" /></span>
+            <span><small>WhatsApp</small>{{ contact.phoneDisplay }}</span>
+          </a>
+        </li>
+        <li>
+          <a [href]="contactService.mailHref">
+            <span class="direct__ic"><app-icon name="mail" size="20" /></span>
+            <span><small>Email</small>{{ contact.email }}</span>
+          </a>
+        </li>
+        <li>
+          <a [href]="contactService.telHref">
+            <span class="direct__ic"><app-icon name="phone" size="20" /></span>
+            <span><small>Call</small>{{ contact.phoneDisplay }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Live message preview -->
+    <div class="preview" appReveal="160">
+      <div class="preview__head preview__head--static">
+        <span class="preview__title">
+          <app-icon name="message" size="18" />
+          Your message preview
+        </span>
+        <span class="preview__hint">Updates as you type</span>
+      </div>
+      <button
+        type="button"
+        class="preview__head preview__head--toggle"
+        [attr.aria-expanded]="previewOpen()"
+        aria-controls="message-preview"
+        (click)="previewOpen.set(!previewOpen())"
+      >
+        <span class="preview__title">
+          <app-icon name="message" size="18" />
+          Your message preview
+        </span>
+        <span class="preview__hint">Updates as you type</span>
+        <span class="preview__chev" aria-hidden="true"><app-icon name="plus" size="16" /></span>
+      </button>
+      <div class="preview__body" id="message-preview" [class.is-open]="previewOpen()">
+        <div class="bubble">
+          <pre>{{ preview() }}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="form-card" appReveal="80">
+      <form [formGroup]="form" (ngSubmit)="send('whatsapp')" novalidate aria-describedby="form-note">
+        <div class="fields">
+          <div class="field">
+            <label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-name" type="text" formControlName="name" autocomplete="name" placeholder="Your full name"
+                   [attr.aria-invalid]="showError('name')" aria-required="true" [attr.aria-describedby]="showError('name') ? 'e-name' : null" />
+            @if (showError('name')) {
+              <p class="error" id="e-name">Please enter your name.</p>
+            }
+          </div>
+
+          <div class="field">
+            <label for="f-business">Business Name</label>
+            <input id="f-business" type="text" formControlName="business" autocomplete="organization" placeholder="Your business or company" />
+          </div>
+
+          <div class="field">
+            <label for="f-phone">Phone Number <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-phone" type="tel" formControlName="phone" autocomplete="tel" inputmode="tel" placeholder="e.g. 98765 43210"
+                   [attr.aria-invalid]="showError('phone')" aria-required="true" [attr.aria-describedby]="showError('phone') ? 'e-phone' : null" />
+            @if (showError('phone')) {
+              <p class="error" id="e-phone">
+                {{ form.controls.phone.hasError('required') ? 'Please enter your phone number.' : 'Please enter a valid phone number (10–15 digits).' }}
+              </p>
+            }
+          </div>
+
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" type="email" formControlName="email" autocomplete="email" inputmode="email" placeholder="you@business.com"
+                   [attr.aria-invalid]="showError('email')" [attr.aria-describedby]="showError('email') ? 'e-email' : null" />
+            @if (showError('email')) {
+              <p class="error" id="e-email">Please enter a valid email address.</p>
+            }
+          </div>
+
+          <div class="field">
+            <label for="f-type">Website Type <span class="req" aria-hidden="true">*</span></label>
+            <div class="select">
+              <select id="f-type" formControlName="websiteType" aria-required="true"
+                      [attr.aria-invalid]="showError('websiteType')" [attr.aria-describedby]="showError('websiteType') ? 'e-type' : null">
+                <option value="" disabled>Select a website type</option>
+                @for (type of websiteTypes; track type) {
+                  <option [value]="type">{{ type }}</option>
+                }
+              </select>
+            </div>
+            @if (showError('websiteType')) {
+              <p class="error" id="e-type">Please choose a website type.</p>
+            }
+          </div>
+
+          <div class="field">
+            <label for="f-pages">Approximate Number of Pages</label>
+            <div class="select">
+              <select id="f-pages" formControlName="pages">
+                <option value="">Select a range</option>
+                @for (range of pageRanges; track range) {
+                  <option [value]="range">{{ range }}</option>
+                }
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="toggles">
+          @for (t of toggles; track t.key) {
+            <fieldset class="toggle">
+              <legend>{{ t.label }}</legend>
+              <div class="segmented">
+                @for (opt of yesNo; track opt) {
+                  <label>
+                    <input type="radio" [formControlName]="t.key" [value]="opt" [name]="t.key" />
+                    <span>{{ opt }}</span>
+                  </label>
+                }
+              </div>
+            </fieldset>
+          }
+        </div>
+
+        <div class="field field--full">
+          <label for="f-req">Additional Requirements</label>
+          <textarea id="f-req" rows="4" formControlName="requirements"
+                    placeholder="Anything else — what you sell, pages you have in mind, websites you like, timelines…"></textarea>
+        </div>
+
+        <div class="status" aria-live="polite">
+          @if (status(); as s) {
+            <p class="status__msg" [class.is-error]="s.type === 'error'" [class.is-success]="s.type === 'success'">
+              <app-icon [name]="s.type === 'error' ? 'close' : 'check'" size="16" />
+              {{ s.text }}
+            </p>
+          }
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn btn--whatsapp">
+            <app-icon name="whatsapp" size="20" />
+            Send Enquiry on WhatsApp
+          </button>
+          <button type="button" class="btn btn--primary" (click)="send('email')">
+            <app-icon name="mail" size="18" />
+            Send Enquiry by Email
+          </button>
+        </div>
+
+        <p class="note" id="form-note">
+          <app-icon name="lock" size="14" />
+          This opens WhatsApp or your email app with your details filled in — nothing is sent until you press send there.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
