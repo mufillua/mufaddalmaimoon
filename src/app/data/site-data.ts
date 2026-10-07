@@ -10,7 +10,7 @@ export const CONTACT = {
   role: 'Web Developer',
   phoneDisplay: '+919073053864',
   phoneIntl: '919073053864',          // used for wa.me + tel: links
-  email: 'iammufi10@gmail.com',
+  email: 'mufimaimoon@gmail.com',
   tagline: 'Modern websites for growing businesses.',
 } as const;
 
