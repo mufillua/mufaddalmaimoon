@@ -21,11 +21,11 @@ import { RevealDirective } from '../../shared/reveal.directive';
           <div class="profile__logo">
             <span class="facet facet--a" aria-hidden="true"></span>
             <span class="facet facet--b" aria-hidden="true"></span>
-            <img src="assets/images/mm-logo.png" width="314" height="154" alt="Mufaddal Maimoon logo — Ideas | Code | Results" loading="lazy" />
+            <img src="assets/images/mm-logo.png" width="314" height="154" alt="Maimoon Digital logo — Ideas | Code | Results" loading="lazy" />
           </div>
           <div class="profile__body">
             <p class="profile__name">{{ contact.name }}</p>
-            <p class="profile__role">{{ contact.role }}</p>
+            <p class="profile__role">{{ contact.role }}<span class="profile__brand">{{ contact.brand }}</span></p>
             <ul class="profile__links">
               <li>
                 <a [href]="contactService.telHref">
@@ -123,6 +123,7 @@ import { RevealDirective } from '../../shared/reveal.directive';
     }
 
     .profile__role { color: var(--muted); font-size: 0.95rem; }
+    .profile__brand { display: block; color: var(--brand); font-weight: 600; font-size: 0.9rem; }
 
     .profile__links {
       display: grid;

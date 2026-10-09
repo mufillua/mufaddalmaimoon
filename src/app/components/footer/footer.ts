@@ -13,9 +13,9 @@ import { Icon } from '../../shared/icon/icon';
         <div class="top">
           <div class="brand">
             <a class="brand__link" href="#home" aria-label="Back to top">
-              <img src="assets/images/mm-mark.png" width="104" height="104" alt="MM logo" loading="lazy" />
+              <img src="assets/images/mm-mark.png" width="104" height="104" alt="Maimoon Digital logo" loading="lazy" />
               <span>
-                <span class="brand__name">{{ contact.name }}</span>
+                <span class="brand__name">{{ contact.brand }}</span>
                 <span class="brand__role">{{ contact.role }}</span>
               </span>
             </a>
@@ -94,7 +94,7 @@ import { Icon } from '../../shared/icon/icon';
         </div>
 
         <div class="bottom">
-          <p>© 2026 {{ contact.name }}. All rights reserved.</p>
+          <p>© 2026 {{ contact.brand }}. All rights reserved.</p>
           <a class="to-top" href="#home">
             Back to top
             <span class="to-top__ic" aria-hidden="true"><app-icon name="arrow-up-right" size="14" /></span>

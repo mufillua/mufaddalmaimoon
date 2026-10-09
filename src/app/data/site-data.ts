@@ -5,7 +5,8 @@ import { IconName } from '../shared/icon/icon';
    -------------------------------------------------------------------------- */
 
 export const CONTACT = {
-  name: 'Mufaddal Maimoon',
+  brand: 'Maimoon Digital',            // site / business name
+  name: 'Mufaddal Maimoon',             // the person behind it (About section)
   firstName: 'Mufaddal',
   role: 'Web Developer',
   phoneDisplay: '+919073053864',
